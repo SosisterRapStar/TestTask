@@ -1,4 +1,3 @@
-
 from sqlalchemy import URL
 from asyncio import current_task
 from sqlalchemy.ext.asyncio import (
@@ -24,7 +23,7 @@ class Base(AsyncAttrs, DeclarativeBase):
 
     def __str__(self):
         return self.__repr__()
-    
+
 
 def create_url_for_db():
     return URL.create(
@@ -33,24 +32,22 @@ def create_url_for_db():
         password=settings.db.db_password,
         host=settings.db.db_host,
         database=settings.db.db_name,
-        port = settings.db.db_port
+        port=settings.db.db_port,
     )
 
 
-
-def session_factory() -> AsyncSession:
-    return async_sessionmaker(
-            bind=create_async_engine(url=create_url_for_db()), autoflush=False, autocommit=False, expire_on_commit=False
-        )
-
 class DatabaseHandler:
-    session: AsyncSession = field(default_factory=session_factory)
+    session_factory: AsyncSession = async_sessionmaker(
+        bind=create_async_engine(url=create_url_for_db()),
+        autoflush=False,
+        autocommit=False,
+        expire_on_commit=False,
+    )
 
-    def get_scoped_session(self):
+    @classmethod
+    def get_scoped_session(cls) -> AsyncSession:
         session = async_scoped_session(
-            session_factory=self.session,   
+            session_factory=cls.session_factory,
             scopefunc=current_task,
         )
         return session
-
-
