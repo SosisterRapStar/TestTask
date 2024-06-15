@@ -16,6 +16,7 @@ from .annotated_types import UUIDpk
 
 class Base(AsyncAttrs, DeclarativeBase):
     __abstract__ = True
+    
     id: Mapped[UUIDpk]
 
     def __repr__(self):
