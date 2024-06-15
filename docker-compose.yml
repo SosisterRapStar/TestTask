@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16.2-alpine3.19
+    restart: always
+    container_name: db
+    env_file:
+      - .env-for-db
+    ports:
+      - '5432:5432'
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
