@@ -5,10 +5,13 @@ import uuid
 from sqlalchemy.ext.asyncio import (
     AsyncSession
 )
+from sqlalchemy.orm import DeclarativeBase
+from typing import Type
+
 
 @dataclass
 class Abstract(ABC):
-    __model: Type[Base] = field(default=None)
+    __model: Type[DeclarativeBase] = field(default=None)
     __session: AsyncSession
 
     @abstractmethod
