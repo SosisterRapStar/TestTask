@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 class Category(Base):
     __tablename__ = "categories"
 
-    name: Mapped[str] = mapped_column(String(20), nullable=False)
+    name: Mapped[str] = mapped_column( String(20), unique=True, nullable=False)
     items: Mapped["Item"] = relationship(back_populates="category", uselist=True,
                                          cascade="all, delete",
                                          passive_deletes=True,)

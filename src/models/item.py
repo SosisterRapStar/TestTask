@@ -1,3 +1,4 @@
+
 from .base import Base
 from sqlalchemy import ForeignKey, Table, Column, Integer, UniqueConstraint, String
 from sqlalchemy.orm import Mapped, relationship, mapped_column
@@ -10,6 +11,7 @@ if TYPE_CHECKING:
 class Item(Base):
     __tablename__ = "items"
 
+    name: Mapped[str] = mapped_column(String(100), unique=True, nullable=False)
     price: Mapped[int] = mapped_column(nullable=False)
     amount: Mapped[int] = mapped_column(nullable=False)
     category: Mapped["Category"] = relationship(back_populates="items", uselist=False)

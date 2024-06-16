@@ -1,27 +1,23 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from abc import ABC, abstractmethod
-from pydantic import BaseModel
-import uuid
-from sqlalchemy.ext.asyncio import (
-    AsyncSession
-)
-from sqlalchemy.orm import DeclarativeBase
-from typing import Type
+from typing import Type, List
+from sqlalchemy import select
+from models.category import Category
+from src.repositories.crud_repo import AbstractCrudRepo, CrudRepo
 
 
 @dataclass
-class AbstractCategoryRepo(ABC):
-    __model: Type[DeclarativeBase] = field(default=None)
-    __session: AsyncSession
+class AbstractCategoryRepo(AbstractCrudRepo):
 
     @abstractmethod
-    def create_category(self, model: BaseModel):
+    async def get_categories(self) -> Category:
         raise NotImplementedError
+
     
-    @abstractmethod
-    def delete_category(self, id: uuid.UUID):
-        raise NotImplementedError
+@dataclass
+class CategoryRepo(AbstractCategoryRepo, CrudRepo):
+    __model = Category
     
-    @abstractmethod
-    def update_category(self, model: BaseModel):
-        raise NotImplementedError
+    async def  get_categories(self) -> List[Category]:
+        stmt = select(Category)
+        return await self.__session.scalars(stmt)
