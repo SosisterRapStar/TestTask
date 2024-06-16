@@ -16,7 +16,7 @@ from sqlalchemy.exc import SQLAlchemyError
 @dataclass
 class AbstractCrudRepo(ABC):
     __model: Type[Base]
-    __session: AsyncSession
+    session: AsyncSession
 
     @abstractmethod
     async def create(self, model: BaseModel) -> Base:

@@ -10,7 +10,7 @@ from schemas.items_schemas import ItemForPost, ItemForUpdate
 
 @dataclass
 class AbstractItemService(ABC):
-    __repository: AbstractItemRepo
+    repository: AbstractItemRepo
     
     @abstractmethod
     async def get_item_by_id(self, id: uuid.UUID) -> Item:

@@ -8,7 +8,7 @@ from repositories.category_repo import AbstractCategoryRepo
 from src.schemas.category_schemas import CategoryForPost, CategoryForUpdate
 @dataclass
 class AbstractCategoryService(ABC):
-    __repository: AbstractCategoryRepo
+    repository: AbstractCategoryRepo
     
     @abstractmethod
     async def create_category(self, category: CategoryForPost):
