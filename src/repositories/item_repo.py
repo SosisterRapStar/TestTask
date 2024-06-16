@@ -17,7 +17,7 @@ from src.repositories.crud_repo import AbstractCrudRepo, CrudRepo
 class AbstractItemRepo(AbstractCrudRepo):
 
     @abstractmethod
-    async def get_items_by_category(self, *categories) -> List[Item]:
+    async def get_items_by_category(self, categories: List[str]) -> List[Item]:
         raise NotImplementedError
     
 
@@ -27,7 +27,9 @@ class ItemRepository(AbstractItemRepo, CrudRepo):
     
     async def get_by_id(self, id: uuid.UUID) -> Item:
         stmt = select(Item).where(Item.id == id).options(selectinload(Category))
-        return await self.__session.scalar(stmt)
+        obj = await self.__session.scalar(stmt)
+        await self.__session.commit()
+        return obj
     
     async def get_by_categories(self, *categories) -> List[Item]:
         stmt = select(Item).join(Category, Item.category_fk == Category.id).where(Category.name.in_(categories))

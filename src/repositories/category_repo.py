@@ -21,3 +21,4 @@ class CategoryRepo(AbstractCategoryRepo, CrudRepo):
     async def  get_categories(self) -> List[Category]:
         stmt = select(Category)
         return await self.__session.scalars(stmt)
+ 
