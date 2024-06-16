@@ -10,7 +10,7 @@ from typing import Type
 
 
 @dataclass
-class Abstract(ABC):
+class AbstractCategoryRepo(ABC):
     __model: Type[DeclarativeBase] = field(default=None)
     __session: AsyncSession
 
