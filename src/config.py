@@ -14,7 +14,7 @@ class DBSettings(BaseSettings):
     db_host: str = Field(default='localhost',env='DB_HOST')
     db_port: int = Field(default=5432, env='DB_PORT')
     db_name: str = Field(default='postgres', env='DB_NAME')
-    
+    db_string_url: str = f"postgresql+asyncpg://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}" 
 
 class Settings(BaseSettings):
     db = DBSettings()
