@@ -1,24 +1,24 @@
-from pydantic_settings import BaseSettings
-from pydantic import Field
+from pydantic import BaseModel, Field
+from pydantic_settings import SettingsConfigDict, BaseSettings
 
-class DbSettings(BaseSettings):
-    pass
+class BSettings(BaseSettings):
+    model_config = SettingsConfigDict(env_file='.env', env_file_encoding='utf-8', extra='ignore')
 
+class DBSettings(BSettings):
+    db_user: str = Field(default='user', alias='DB_USER')
+    db_password: str = Field(default='1234', alias='DB_PASSWORD')
+    db_host: str = Field(default='localhost', alias='DB_HOST')
+    db_port: str = Field(default='5432', alias='DB_PORT')
+    db_name: str = Field(default='postgres', alias='DB_NAME')
 
+    @property
+    def db_string_url(self) -> str:
+        return f"postgresql+asyncpg://{self.db_user}:{self.db_password}@{self.db_host}:{self.db_port}/{self.db_name}"
 
-
-class DBSettings(BaseSettings):
-    db_string_url: str = Field(env='DB_STRING_URL')
-    db_user: str = Field(default='user', env='DB_USER')
-    db_password: str = Field(default='1234', env='DB_PASSWORD')
-    db_host: str = Field(default='localhost',env='DB_HOST')
-    db_port: int = Field(default=5432, env='DB_PORT')
-    db_name: str = Field(default='postgres', env='DB_NAME')
-    db_string_url: str = f"postgresql+asyncpg://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}" 
-
-class Settings(BaseSettings):
-    db = DBSettings()
-
+class Settings(BaseModel):
+    db: DBSettings = DBSettings()
 
 settings = Settings()
- 
+
+# Access the dynamically generated db_string_url
+print(settings.db.db_string_url)
