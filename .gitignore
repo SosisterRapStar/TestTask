@@ -4,3 +4,4 @@ myvenv/
 .env_for_db
 data/
 dist/
+alembic/versions
