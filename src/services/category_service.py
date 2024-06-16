@@ -5,14 +5,22 @@ import uuid
 from models.category import Category
 from sqlalchemy.ext.asyncio import AsyncSession
 from repositories.category_repo import AbstractCategoryRepo
-
+from src.schemas.category_schemas import CategoryForPost, CategoryForUpdate
 @dataclass
 class AbstractCategoryService(ABC):
     __session: AsyncSession
     __repository: AbstractCategoryRepo
     
     @abstractmethod
+    async def create_category(category: CategoryForPost):
+        raise NotImplementedError
+    
+    @abstractmethod
     async def get_category_by_id(self, id: uuid.UUID):
+        raise NotImplementedError
+    
+    @abstractmethod
+    async def get_categories(self):
         raise NotImplementedError
     
     @abstractmethod
@@ -20,7 +28,7 @@ class AbstractCategoryService(ABC):
         raise NotImplementedError
     
     @abstractmethod
-    async def update_category(self, id: uuid.UUID):
+    async def update_category(self, id: uuid.UUID, updating_category: CategoryForUpdate):
         raise NotImplementedError
     
     

@@ -6,8 +6,8 @@ from pydantic import BaseModel, Field
 
     
 class BaseCategory(BaseModel):
-    name: str
-    description: str
+    description: str = Field(default=None, max_length=200)
+    name: str = Field(max_length=20)
     
 class CategoryWithId(BaseCategory):
     id: uuid.UUID
@@ -15,11 +15,11 @@ class CategoryWithId(BaseCategory):
 class CategoryForResponse(CategoryWithId):
     pass
 
-class CategotyForPost(BaseCategory):
-    description: str = Field(default=None, max_length=200)
-    name: str = Field(max_length=20)
-
-class CategoryForUpdate(CategotyForPost):
+class CategoryForPost(BaseCategory):
     pass
+
+class CategoryForUpdate(CategoryForPost):
+    description: str = Field(default=None, max_length=200)
+    name: str = Field(default=None, max_length=20)
     
 
