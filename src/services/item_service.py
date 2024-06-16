@@ -4,10 +4,12 @@ import uuid
 from models import item
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
+from repositories.item_repo import AbstractItemRepo
 
 @dataclass
 class AbstractItemService(ABC):
     __session: AsyncSession
+    __repository: AbstractItemRepo
     
     @abstractmethod
     async def get_item(self, id: uuid.UUID):
