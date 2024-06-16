@@ -1,10 +1,12 @@
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
+from tkinter import N
 import uuid
 from models import item
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
 from repositories.item_repo import AbstractItemRepo
+from schemas.items_schemas import ItemForPost, ItemForUpdate
 
 @dataclass
 class AbstractItemService(ABC):
@@ -12,8 +14,9 @@ class AbstractItemService(ABC):
     __repository: AbstractItemRepo
     
     @abstractmethod
-    async def get_item(self, id: uuid.UUID):
+    async def get_item_by_id(self, id: uuid.UUID):
         raise NotImplementedError
+    
     
     @abstractmethod
     async def delete_item_by_id(self, id: uuid.UUID):
@@ -24,7 +27,11 @@ class AbstractItemService(ABC):
         raise NotImplementedError
     
     @abstractmethod
-    async def update_item(self, id: uuid.UUID):
+    async def update_item(self, id: uuid.UUID, updating_item: ItemForUpdate):
+        raise NotImplementedError
+    
+    @abstractmethod
+    async def create_item(item: ItemForPost):
         raise NotImplementedError
     
     
