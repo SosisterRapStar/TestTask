@@ -16,7 +16,7 @@ class CategoryForResponse(CategoryWithId):
     pass
 
 class CategotyForPost(BaseCategory):
-    description: str = Field(max_length=200)
+    description: str = Field(default=None, max_length=200)
     name: str = Field(max_length=20)
 
 class CategoryForUpdate(CategotyForPost):
