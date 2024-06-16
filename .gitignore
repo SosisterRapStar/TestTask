@@ -1,3 +1,5 @@
 myvenv/
 .env
 *__pycache__
+.env_for_db
+data/
