@@ -6,6 +6,12 @@ from models.category import Category
 from sqlalchemy.ext.asyncio import AsyncSession
 from repositories.category_repo import AbstractCategoryRepo
 from src.schemas.category_schemas import CategoryForPost, CategoryForUpdate
+from fastapi import HTTPException
+from .HTTPexc import SomeErrorHTTPException, CategoryNotFoundHTTPException
+from sqlalchemy.exc import NoResultFound, IntegrityError
+
+        
+
 @dataclass
 class AbstractCategoryService(ABC):
     repository: AbstractCategoryRepo
@@ -34,19 +40,37 @@ class AbstractCategoryService(ABC):
 @dataclass
 class CategoryService(AbstractCategoryService):
     async def create_category(self, category: CategoryForPost):
-        return await self.__repository.create(model=category)
+        try:
+            return await self.__repository.create(model=category)
+        except IntegrityError:
+            raise SomeErrorHTTPException()
+            
     
     async def get_category_by_id(self, id: uuid.UUID):
-        return await self.__repository.get_by_id(id=id)
+        try:
+            return await self.__repository.get_by_id(id=id)
+        except NoResultFound:
+            raise CategoryNotFoundHTTPException()
     
     async def get_categories(self):
-        return await self.__repository.get_categories()
+        try:
+            return await self.__repository.get_categories()
+        except NoResultFound:
+            raise CategoryNotFoundHTTPException()
     
     async def delete_category_by_id(self, id: uuid.UUID):
-        return await self.__repository.delete(id=id)
+        try:
+            return await self.__repository.delete(id=id)
+        except NoResultFound:
+            raise CategoryNotFoundHTTPException()
     
     async def update_category(self, id: uuid.UUID, updating_category: CategoryForUpdate):
-        return await self.__repository.update(id=id, model=updating_category)
+        try:
+            return await self.__repository.update(id=id, model=updating_category)
+        except NoResultFound:
+            raise CategoryNotFoundHTTPException()
+        except IntegrityError:
+            raise SomeErrorHTTPException()
     
     
 
