@@ -6,7 +6,7 @@ class BSettings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=".test_env", env_file_encoding="utf-8", extra="ignore" # здесь можно менять окружение на тестовое
     )
-
+    
 
 class DBSettings(BSettings):
     db_user: str = Field(default="user", alias="DB_USER")
