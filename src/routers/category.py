@@ -8,7 +8,7 @@ from src.schemas.category_schemas import (
     CategoryForUpdate,
     CategoryForResponse,
 )
-from dependencies.service_dependencies import category_service
+from src.dependencies.service_dependencies import category_service
 
 
 router = APIRouter(tags=["Categories"])
@@ -53,5 +53,5 @@ async def update_category(
     category_id: uuid.UUID,
 ):
     return await service.update_category(
-        id=category_id, updating_category=update_category
+        id=category_id, updating_category=updating_category
     )

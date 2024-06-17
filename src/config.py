@@ -4,7 +4,7 @@ from pydantic_settings import SettingsConfigDict, BaseSettings
 
 class BSettings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=".env", env_file_encoding="utf-8", extra="ignore"
+        env_file=".test_env", env_file_encoding="utf-8", extra="ignore" # здесь можно менять окружение на тестовое
     )
 
 

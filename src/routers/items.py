@@ -2,7 +2,7 @@ from fastapi import APIRouter, Query
 from starlette import status
 from typing import List, Annotated
 import uuid
-from dependencies.service_dependencies import item_service
+from src.dependencies.service_dependencies import item_service
 from src.schemas.items_schemas import (
     ItemForUpdate,
     ItemForPost,
@@ -46,6 +46,6 @@ async def get_items_by_categories(
     return await service.get_items_by_categories(categories=category)
 
 
-@router.delete("/{item_id}/", status_code=status.HTTP_200_OK)
+@router.delete("/{item_id}/", status_code=status.HTTP_200_OK, response_model=ItemForResponse)
 async def delete_item(item_id: uuid.UUID, service: item_service):
     return await service.delete_item_by_id(id=item_id)

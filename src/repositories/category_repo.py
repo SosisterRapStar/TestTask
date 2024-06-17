@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from abc import ABC, abstractmethod
 from typing import Type, List, ClassVar
 from sqlalchemy import Result, select
-from models.category import Category
+from src.models.category import Category
 from src.repositories.crud_repo import AbstractCrudRepo, CrudRepo
 
 

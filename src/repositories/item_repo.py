@@ -9,11 +9,10 @@ import uuid
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import DeclarativeBase
 from typing import Any, ClassVar, Coroutine, Type, List
-from models import category
-from models.base import Base
-from models.item import Item
-from models.category import Category
-from schemas.items_schemas import ItemForPost, ItemForUpdate
+from src.models.base import Base
+from src.models.item import Item
+from src.models.category import Category
+from src.schemas.items_schemas import ItemForPost, ItemForUpdate
 from src.repositories.crud_repo import AbstractCrudRepo, CrudRepo
 from sqlalchemy.exc import NoResultFound
 

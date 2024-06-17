@@ -3,11 +3,10 @@ from abc import ABC, abstractmethod
 from pydantic import BaseModel
 import uuid
 from sqlalchemy.ext.asyncio import AsyncSession
-from models import category
 from src.models.base import Base
 from typing import Type, List, ClassVar
 from sqlalchemy import Result, select, delete, update
-from models.category import Category
+from src.models.category import Category
 from sqlalchemy.exc import SQLAlchemyError
 
 

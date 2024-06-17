@@ -1,12 +1,8 @@
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
-from re import I
 import uuid
-from models.category import Category
-from sqlalchemy.ext.asyncio import AsyncSession
-from repositories.category_repo import AbstractCategoryRepo
+from src.repositories.category_repo import AbstractCategoryRepo
 from src.schemas.category_schemas import CategoryForPost, CategoryForUpdate
-from fastapi import HTTPException
 from .HTTPexc import SomeErrorHTTPException, CategoryNotFoundHTTPException
 from sqlalchemy.exc import NoResultFound, IntegrityError
 

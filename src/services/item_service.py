@@ -1,12 +1,10 @@
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
 import uuid
-from models.category import Category
-from models.item import Item
-from sqlalchemy.ext.asyncio import AsyncSession
+from src.models.item import Item
 from typing import List
-from repositories.item_repo import AbstractItemRepo, CategoryNotFound
-from schemas.items_schemas import ItemForPost, ItemForUpdate
+from src.repositories.item_repo import AbstractItemRepo, CategoryNotFound
+from src.schemas.items_schemas import ItemForPost, ItemForUpdate
 from .HTTPexc import ItemNotFoundHTTPException, SomeErrorHTTPException, CategoryNotFoundHTTPException
 from sqlalchemy.exc import NoResultFound, IntegrityError
 
