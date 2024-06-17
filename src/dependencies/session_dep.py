@@ -5,6 +5,8 @@ from src.models.base import DatabaseHandler
 
 
 async def get_session() -> AsyncSession:
-    return DatabaseHandler.get_scoped_session()
+    session = DatabaseHandler.get_scoped_session()
+    async with session() as session:
+        yield session
 
 session_dep = Annotated[AsyncSession, Depends(get_session)]

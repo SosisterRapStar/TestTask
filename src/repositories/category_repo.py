@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
 from typing import Type, List
-from sqlalchemy import select
+from sqlalchemy import Result, select
 from models.category import Category
 from src.repositories.crud_repo import AbstractCrudRepo, CrudRepo
 
@@ -20,5 +20,7 @@ class CategoryRepo(AbstractCategoryRepo, CrudRepo):
     
     async def  get_categories(self) -> List[Category]:
         stmt = select(Category)
-        return await self.__session.scalars(stmt)
+        res: Result = await self.__session.execute(stmt)
+        objs = await res.all()
+        return list(objs)
  

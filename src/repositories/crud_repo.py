@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import (
 )
 from src.models.base import Base
 from typing import Type, List
-from sqlalchemy import select, delete, update
+from sqlalchemy import Result, select, delete, update
 from models.category import Category
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -56,6 +56,6 @@ class CrudRepo(AbstractCrudRepo):
  
     async def get_by_id(self, id: uuid.UUID) -> Base:
         stmt = select(self.__model).where(self.__model.id == id)
-        obj = await self.__session.scalar(stmt)
-        return obj
+        res: Result = await self.__session.execute(stmt)
+        return await res.one()
     

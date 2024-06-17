@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
 from re import L
-from sqlalchemy import select
+from sqlalchemy import Result, select
 from sqlalchemy.orm import selectinload, contains_eager
 import uuid
 from sqlalchemy.ext.asyncio import (
@@ -27,13 +27,16 @@ class ItemRepository(AbstractItemRepo, CrudRepo):
     
     async def get_by_id(self, id: uuid.UUID) -> Item:
         stmt = select(Item).where(Item.id == id).options(selectinload(Category))
-        obj = await self.__session.scalar(stmt)
+        result: Result = await self.__session.execute(stmt)
+        obj = result.one()
         await self.__session.commit()
         return obj
     
     async def get_by_categories(self, *categories) -> List[Item]:
         stmt = select(Item).join(Category, Item.category_fk == Category.id).where(Category.name.in_(categories))
         # .options(contains_eager(Item.category))
-        return list(await self.__session.scalars(stmt))
+        res: Result = await self.__session.execute(stmt)
+        objs = await res.all()
+        return list(objs)
 
     
