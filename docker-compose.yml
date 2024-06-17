@@ -16,14 +16,14 @@ services:
     build: 
       context: .
     env_file:
-      - .env-docker-comm
+      - .env
     container_name: app
     expose:
       - "8000"
+    ports:
+      - '8000:8000'
     depends_on:
-      - redis
-      - test_db  
-    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+      - db  
 
     volumes:
       - ./src:/app/src
