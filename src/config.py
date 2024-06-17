@@ -26,5 +26,4 @@ class Settings(BaseModel):
 
 settings = Settings()
 
-# Access the dynamically generated db_string_url
-print(settings.db.db_string_url)
+

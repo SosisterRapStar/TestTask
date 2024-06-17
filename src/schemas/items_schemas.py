@@ -33,4 +33,4 @@ class ItemForUpdate(ItemForPost):
     price: int = Field(default=None)
     amount: int = Field(default=None)
     category_name: str = Field(max_length=20, default=None)
-    description: str = Field(default=None, max_length=200, default=None)
+    description: str = Field(default=None, max_length=200)

@@ -7,7 +7,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import DeclarativeBase
 from typing import Any, Coroutine, Type, List
 from models.base import Base
-from models.item import Item, Category
+from models.item import Item
+from models.category import Category
 from src.repositories.crud_repo import AbstractCrudRepo, CrudRepo
 
 
