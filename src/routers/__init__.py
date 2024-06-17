@@ -1,5 +1,5 @@
 from fastapi.routing import APIRouter
-from .category import router as cat_router 
+from .category import router as cat_router
 from .items import router as item_router
 
 router = APIRouter()

@@ -13,14 +13,13 @@ class AbstractCategoryRepo(AbstractCrudRepo):
     async def get_categories(self) -> Category:
         raise NotImplementedError
 
-    
+
 @dataclass
 class CategoryRepo(AbstractCategoryRepo, CrudRepo):
     __model = Category
-    
-    async def  get_categories(self) -> List[Category]:
+
+    async def get_categories(self) -> List[Category]:
         stmt = select(Category)
         res: Result = await self.__session.execute(stmt)
         objs = await res.all()
         return list(objs)
- 

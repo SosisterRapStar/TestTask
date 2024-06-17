@@ -9,4 +9,5 @@ async def get_session() -> AsyncSession:
     async with session() as session:
         yield session
 
+
 session_dep = Annotated[AsyncSession, Depends(get_session)]

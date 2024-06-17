@@ -15,4 +15,6 @@ updated_at_timestamp = Annotated[
     ),
 ]
 
-UUIDpk = Annotated[uuid.UUID, mapped_column(primary_key=True, server_default=text("gen_random_uuid()"))]
+UUIDpk = Annotated[
+    uuid.UUID, mapped_column(primary_key=True, server_default=text("gen_random_uuid()"))
+]
