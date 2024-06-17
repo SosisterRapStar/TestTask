@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
-from re import L
 from sqlalchemy import Result, select
 from sqlalchemy.orm import selectinload, contains_eager
 import uuid
