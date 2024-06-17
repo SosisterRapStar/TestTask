@@ -5,3 +5,5 @@ myvenv/
 data/
 dist/
 alembic/versions
+.test
+.test_db_data
