@@ -31,7 +31,7 @@ class ItemRepository(AbstractItemRepo, CrudRepo):
         await self.__session.commit()
         return obj
 
-    async def get_by_categories(self, *categories) -> List[Item]:
+    async def get_items_by_category(self, *categories) -> List[Item]:
         stmt = (
             select(Item)
             .join(Category, Item.category_fk == Category.id)
