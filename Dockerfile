@@ -16,3 +16,8 @@ RUN poetry config virtualenvs.create false
 RUN poetry install --no-root --no-interaction --no-ansi
 
 COPY . .
+
+
+RUN chmod +x alembic-uvi-script.sh
+
+ENTRYPOINT ["./alembic-uvi-script.sh"]
