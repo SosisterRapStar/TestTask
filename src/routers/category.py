@@ -1,4 +1,4 @@
-from sre_constants import CATEGORY_UNI_DIGIT
+
 from fastapi import APIRouter, Query
 from starlette import status
 from typing import List, Annotated
@@ -8,7 +8,7 @@ from src.schemas.category_schemas import CategoryForPost, CategoryForUpdate, Cat
 from dependencies.service_dependencies import category_service
 
 
-cat_router = APIRouter(tags=["Categories"])
+router = APIRouter(tags=["Categories"])
 
 
 
