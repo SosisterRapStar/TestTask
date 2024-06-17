@@ -4,10 +4,11 @@ from src.schemas.category_schemas import CategoryForResponse
 
 
 class BaseItem(BaseModel):
-    model_config = ConfigDict(extra="forbid")
+    model_config = ConfigDict(extra="forbid", from_attributes=True)
     price: int
     amount: int
-    description: str
+    name: str = Field(max_length=100)
+    description: str | None = Field(default=None)
 
 
 class ItemWithId(BaseItem):
@@ -30,7 +31,8 @@ class ItemForPost(BaseItem):
 
 
 class ItemForUpdate(ItemForPost):
-    price: int = Field(default=None)
-    amount: int = Field(default=None)
-    category_name: str = Field(max_length=20, default=None)
-    description: str = Field(default=None, max_length=200)
+    price: int | None = Field(default=None)
+    amount: int | None = Field(default=None)
+    name: str | None = Field(default=None)
+    category_name: str  | None= Field(max_length=20, default=None)
+    description: str | None = Field(default=None, max_length=200)

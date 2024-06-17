@@ -41,7 +41,7 @@ async def update_item(item: ItemForUpdate, service: item_service, item_id: uuid.
 
 @router.get("/", status_code=status.HTTP_200_OK, response_model=List[ItemForResponse])
 async def get_items_by_categories(
-    service: item_service, q: Annotated[list[str] | None, Query(max_length=20)] = None
+    service: item_service, category: Annotated[list[str] | None, Query(max_length=20)] = None
 ):
     return await service.get_items_by_categories(categories=q)
 

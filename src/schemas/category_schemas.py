@@ -3,8 +3,8 @@ from pydantic import BaseModel, Field, ConfigDict
 
 
 class BaseCategory(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    description: str = Field(default=None, max_length=200)
+    model_config = ConfigDict(extra="forbid", from_attributes=True)
+    description: str | None = Field(default=None, max_length=200)
     name: str = Field(max_length=20)
 
 

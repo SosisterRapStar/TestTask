@@ -1,3 +1,4 @@
+from click import echo
 from sqlalchemy import URL
 from asyncio import current_task
 from sqlalchemy.ext.asyncio import (
@@ -39,7 +40,7 @@ def create_url_for_db():
 
 class DatabaseHandler:
     session_factory: AsyncSession = async_sessionmaker(
-        bind=create_async_engine(url=create_url_for_db()),
+        bind=create_async_engine(url=create_url_for_db(), echo=True),
         autoflush=False,
         autocommit=False,
         expire_on_commit=False,
