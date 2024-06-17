@@ -4,7 +4,7 @@ from typing import List, Annotated
 import uuid
 from dependencies.service_dependencies import item_service
 from src.schemas.items_schemas import ItemForUpdate, ItemForPost, ItemForResponse, ItemForUpdate, ItemForResponseWithCategory
-router = APIRouter(tags=["Items"])
+item_router = APIRouter(tags=["Items"])
 
 
 

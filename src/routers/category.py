@@ -8,7 +8,7 @@ from src.schemas.category_schemas import CategoryForPost, CategoryForUpdate, Cat
 from dependencies.service_dependencies import category_service
 
 
-router = APIRouter(tags=["Categories"])
+cat_router = APIRouter(tags=["Categories"])
 
 
 
