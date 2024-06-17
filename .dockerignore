@@ -5,3 +5,9 @@ dist
 data
 myvenv
 *__pycache__
+.env_for_db
+.env_for_test_db
+.test_env
+Makefile
+README.md
+test_docker-compose.yml
