@@ -7,3 +7,4 @@ dist/
 alembic/versions
 .test
 .test_db_data
+.pytest_cache

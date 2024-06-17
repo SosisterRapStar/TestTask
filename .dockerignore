@@ -1,0 +1,7 @@
+tests
+.test
+dist
+.test_db_data
+data
+myvenv
+*__pycache__
