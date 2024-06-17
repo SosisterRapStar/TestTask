@@ -1,12 +1,13 @@
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
 import uuid
+from models.category import Category
 from models.item import Item
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
-from repositories.item_repo import AbstractItemRepo
+from repositories.item_repo import AbstractItemRepo, CategoryNotFound
 from schemas.items_schemas import ItemForPost, ItemForUpdate
-from .HTTPexc import ItemNotFoundHTTPException, SomeErrorHTTPException
+from .HTTPexc import ItemNotFoundHTTPException, SomeErrorHTTPException, CategoryNotFoundHTTPException
 from sqlalchemy.exc import NoResultFound, IntegrityError
 
 
@@ -58,6 +59,8 @@ class ItemService(AbstractItemService):
     async def update_item(self, id: uuid.UUID, updating_item: ItemForUpdate) -> Item:
         try:
             return await self.repository.update(model=updating_item, id=id)
+        except CategoryNotFound:
+            raise CategoryNotFoundHTTPException()
         except NoResultFound:
             raise ItemNotFoundHTTPException()
         except IntegrityError:

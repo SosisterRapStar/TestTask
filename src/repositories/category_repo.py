@@ -21,5 +21,5 @@ class CategoryRepo(AbstractCategoryRepo, CrudRepo):
     async def get_categories(self) -> List[Category]:
         stmt = select(Category)
         res: Result = await self.session.execute(stmt)
-        objs = await res.all()
-        return list(objs)
+        objs = res.scalars().all()
+        return objs

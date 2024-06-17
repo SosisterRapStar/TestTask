@@ -43,7 +43,7 @@ async def update_item(item: ItemForUpdate, service: item_service, item_id: uuid.
 async def get_items_by_categories(
     service: item_service, category: Annotated[list[str] | None, Query(max_length=20)] = None
 ):
-    return await service.get_items_by_categories(categories=q)
+    return await service.get_items_by_categories(categories=category)
 
 
 @router.delete("/{item_id}/", status_code=status.HTTP_200_OK)

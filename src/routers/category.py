@@ -17,7 +17,7 @@ router = APIRouter(tags=["Categories"])
 @router.get(
     "/", status_code=status.HTTP_200_OK, response_model=List[CategoryForResponse]
 )
-async def get_categories(service: category_service):
+async def get_all_categories(service: category_service):
     return await service.get_categories()
 
 

@@ -46,7 +46,7 @@ class ItemRepository(AbstractItemRepo, CrudRepo):
         stmt = (
             select(Item)
             .join(Category, Item.category_fk == Category.id)
-            .where(Category.name.in_(categories))
+            .where(Category.name.in_(*categories))
         )
         # .options(contains_eager(Item.category))
         res: Result = await self.session.execute(stmt)
